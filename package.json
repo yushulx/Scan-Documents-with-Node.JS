@@ -1,0 +1,10 @@
+{
+  "name": "Nodejs_DWT",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "DynamsoftRD",
+  "dependencies": {
+    "express": "^4.10.3",
+    "formidable": "^1.0.15"
+  }
+}

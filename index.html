@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Python DWT Hello World</title>
+        <script src="/Resources/dynamsoft.webtwain.initiate.js"></script>
+        <script src="/Resources/dynamsoft.webtwain.config.js"></script>
+    </head>
+    <body>
+        <div id="dwtcontrolContainer"></div>
+        <input type="button" value="Acquire" onclick="AcquireImage();" />
+        <input id="btnUpload" type="button" value="Upload Image" onclick="btnUpload_onclick()">
+        <!--Custom script goes here-->
+        <script type="text/javascript">
+            function AcquireImage(){
+            DWObject.IfShowUI = false;
+            DWObject.SelectSource();
+            DWObject.OpenSource();
+            DWObject.AcquireImage();
+            }
+            function btnUpload_onclick() {
+                DWObject.HTTPPort = 2014;
+                var CurrentPathName = unescape(location.pathname); // get current PathName in plain ASCII
+                var CurrentPath = CurrentPathName.substring(0, CurrentPathName.lastIndexOf("/") + 1);
+                var strActionPage = CurrentPath + "upload";
+                var strHostIP = "192.168.8.84"; // server IP
+                var sFun = function(){
+                    alert('successful');
+                }, fFun = function(){
+                    alert('failed');
+                };
+                DWObject.HTTPUploadThroughPostEx(
+                strHostIP,
+                DWObject.CurrentImageIndexInBuffer,
+                strActionPage,
+                "test.jpg",
+                1,// JPEG
+            sFun, fFun
+            );
+            }
+        </script>
+    </body>
+</html>
