@@ -1,10 +1,18 @@
 Online Document Imaging and Uploading with Dynamic Web TWAIN & Node.js
 =======================================================================
 
-The sample shows how to upload files with Struts. 
+The sample shows how to implement a simple online document imaging and uploading application with Dynamic Web TWAIN & Node.js.
 
+Screenshots
+-----------
+![image](http://www.codepool.biz/wp-content/uploads/2014/11/nodejs_dwt.png)
 
-How to Run:
+Download & Installation
+-----------------------
+* [Dynamic Web TWAIN][1]
+* [Node.js][2]
+
+How to Run
 -----------
 1. `npm install formidable@latest`
 2. `npm install express`
@@ -13,8 +21,11 @@ How to Run:
 
 References:
 -----------
-* [Express][1]
-* [Formidable][2]
+* [Express][3]
+* [Formidable][4]
 
-[1]:http://expressjs.com/
-[2]:https://github.com/felixge/node-formidable
+[1]:https://www.dynamsoft.com/Secure/Register_ClientInfo.aspx?productName=WebTWAIN&from=FromDownload
+[2]:http://nodejs.org/download/
+[3]:http://expressjs.com/
+[4]:https://github.com/felixge/node-formidable
+
