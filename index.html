@@ -21,7 +21,7 @@
                 var CurrentPathName = unescape(location.pathname); // get current PathName in plain ASCII
                 var CurrentPath = CurrentPathName.substring(0, CurrentPathName.lastIndexOf("/") + 1);
                 var strActionPage = CurrentPath + "upload";
-                var strHostIP = "192.168.8.84"; // server IP
+                var strHostIP = "localhost"; // server IP e.g. 192.168.8.84
                 var sFun = function(){
                     alert('successful');
                 }, fFun = function(){
