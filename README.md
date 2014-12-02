@@ -7,6 +7,10 @@ Screenshots
 -----------
 ![image](http://www.codepool.biz/wp-content/uploads/2014/11/nodejs_dwt.png)
 
+Blog
+-----------------------
+[Document Imaging and Uploading With Dynamic Web TWAIN and Node.js][5]
+
 Download & Installation
 -----------------------
 * [Dynamic Web TWAIN][1]
@@ -28,4 +32,4 @@ References:
 [2]:http://nodejs.org/download/
 [3]:http://expressjs.com/
 [4]:https://github.com/felixge/node-formidable
-
+[5]:http://www.codepool.biz/twain/document-imaging-and-uploading-with-dynamic-web-twain-and-node-js.html
