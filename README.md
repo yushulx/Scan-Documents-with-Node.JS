@@ -13,7 +13,7 @@ Blog
 
 Download & Installation
 -----------------------
-* [Dynamic Web TWAIN][1]
+* [Dynamic Web TWAIN v10.0.1][1]
 * [Node.js][2]
 
 How to Run
@@ -28,7 +28,7 @@ References:
 * [Express][3]
 * [Formidable][4]
 
-[1]:https://www.dynamsoft.com/Secure/Register_ClientInfo.aspx?productName=WebTWAIN&from=FromDownload
+[1]:http://www.dynamsoft.com/download/Dynamic%20Web%20TWAIN%2010.0.1%20TRIAL.exe
 [2]:http://nodejs.org/download/
 [3]:http://expressjs.com/
 [4]:https://github.com/felixge/node-formidable
