@@ -18,15 +18,9 @@ Download & Installation
 
 How to Run
 -----------
-1. `npm install formidable@latest`
-2. `npm install express`
-3. `node server.js`
-4. visit `localhost:2014`
-
-References:
------------
-* [Express][3]
-* [Formidable][4]
+1. `npm install`
+2. `node server.js`
+3. visit `localhost:2014`
 
 [1]:http://www.dynamsoft.com/download/Dynamic%20Web%20TWAIN%2010.0.1%20TRIAL.exe
 [2]:http://nodejs.org/download/
