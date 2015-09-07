@@ -1,18 +1,19 @@
 var formidable = require('formidable');
 var util = require('util');
+var path = requrie('path');
 var express = require('express');
 var fs = require('fs');
 var app = express();
 
 
-app.use(express.static(__dirname, '/public')); // load static resources
-app.use(function(req, res, next) {  
-    res.header("Access-Control-Allow-Origin", "*");   
-    res.header("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, OPTIONS");  
-    res.header("Access-Control-Allow-Headers","X-Requested-With, content-type");  
-    res.header("Access-Control-Allow-Credentials", true);  
-    next();  
-});  
+app.use(express.static(path.resolve(__dirname, './'))); // load static resources
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods","PUT, POST, GET, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers","X-Requested-With, content-type");
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+});
 // app.get('/', function(req, res) {
 //     res.sendFile(__dirname + '/scan.html');
 // })
@@ -23,13 +24,13 @@ app.post('/upload', function(req, res) {
         //     fields: fields,
         //     files: files
         // }));
- 
+
         fs.readFile(files.RemoteFile.path, function(err, data) {
         	// save file from temp dir to new dir
             var newPath = __dirname + "/uploads/" + files.RemoteFile.name;
             fs.writeFile(newPath, data, function(err) {
             	if (err) throw err;
-            	console.log('file saved');	
+            	console.log('file saved');
                 res.end();
             });
         });
