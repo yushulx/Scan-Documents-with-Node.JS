@@ -1,0 +1,67 @@
+
+	
+.ds-dwt-container{
+	
+	z-index:100;
+}
+
+.ds-dwt-prev, .ds-dwt-next,
+.ds-dwt-prev:hover, .ds-dwt-next:hover{
+
+	display: none; 
+	/* 
+	display: inline-block; 
+	*display: inline;
+	*/
+	
+	background-image: url('slide.png');
+	background-repeat: no-repeat;
+
+
+	cursor:pointer;
+	position:absolute;
+	top:300px;
+	left:10px;
+	width: 31px;
+	height: 54px;
+	*zoom: 1;
+	z-index:101;
+}
+
+.ds-dwt-next:hover {
+  left:93%;
+  background-position: -227px 0;
+}
+.ds-dwt-next {
+  left:93%;
+  background-position: -227px -64px;
+}
+.ds-dwt-prev:hover{
+  background-position: -186px -64px;
+}
+.ds-dwt-prev {
+  background-position: -186px 0;
+}
+
+
+
+.ds-dwt-container-body{
+	overflow:hidden;
+	position:relative;
+}
+
+.tab-pannel{
+ float: left; 
+ overflow: hidden;
+}
+
+
+
+#ds-dwt-container-id{
+	width:800px;
+	height:600px;
+	position:relative;
+	border: 1px solid #CCCCCC;
+}
+
+
