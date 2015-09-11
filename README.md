@@ -13,16 +13,18 @@ Blog
 
 Download & Installation
 -----------------------
-* [Dynamic Web TWAIN v10.0.1][1]
+* [Dynamic Web TWAIN][1]
 * [Node.js][2]
 
 How to Run
 -----------
-1. `npm install`
-2. `node server.js`
-3. visit `localhost:2014`
+1. download and install Dynamic Web TWAIN
+2. copy the Resource folder from the installation directory (like C:\Program Files (x86)\Dynamsoft\Dynamic Web TWAIN SDK 11.1 Trial)
+3. `npm install`
+4. `node server.js`
+5. visit `localhost:2014`
 
-[1]:http://www.dynamsoft.com/download/Dynamic%20Web%20TWAIN%2010.0.1%20TRIAL.exe
+[1]:http://www.dynamsoft.com/CustomerPortal/LoginOrRegister.aspx?status=signup&op=4DD608F3803493E4&product=CB4BDC4FF903450C
 [2]:http://nodejs.org/download/
 [3]:http://expressjs.com/
 [4]:https://github.com/felixge/node-formidable
