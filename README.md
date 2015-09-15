@@ -13,7 +13,7 @@ Blog
 
 Download & Installation
 -----------------------
-* [Dynamic Web TWAIN][1]
+* [Dynamic Web TWAIN 11.1][1]
 * [Node.js][2]
 
 How to Run
