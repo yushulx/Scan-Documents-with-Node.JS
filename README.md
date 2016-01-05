@@ -24,7 +24,7 @@ How to Run
 4. `node server.js`
 5. visit `localhost:2014`
 
-[1]:http://www.dynamsoft.com/CustomerPortal/LoginOrRegister.aspx?status=signup&op=4DD608F3803493E4&product=CB4BDC4FF903450C
+[1]:http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
 [2]:http://nodejs.org/download/
 [3]:http://expressjs.com/
 [4]:https://github.com/felixge/node-formidable
