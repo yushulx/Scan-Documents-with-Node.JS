@@ -19,10 +19,13 @@ Download & Installation
 How to Run
 -----------
 1. download and instal Dynamic Web TWAIN
-2. copy the Resource folder from the installation directory (like C:\Program Files (x86)\Dynamsoft\Dynamic Web TWAIN SDK 11.1 Trial)
-3. `npm install`
-4. `node server.js`
-5. visit `localhost:2014`
+2. copy the Resource folder from the installation directory (like C:\Program Files (x86)\Dynamsoft\Dynamic Web TWAIN SDK {version number} Trial)
+3. Install two Node.js modules by CMD
+	`npm install formidable@latest`
+	`npm install express`
+4. Run the server in CMD
+	`node server.js`
+5. visit `localhost:2016`
 
 [1]:http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
 [2]:http://nodejs.org/download/
