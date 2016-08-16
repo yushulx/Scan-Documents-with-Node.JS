@@ -1,2 +1,9 @@
 /node_modules
-/Resources
+/Resources/DynamicWebTWAIN.cab
+/Resources/DynamicWebTWAINActiveX.exe
+/Resources/DynamicWebTWAINHTML5Edition.exe
+/Resources/DynamicWebTWAINHTML5MACTrialEdition.pkg
+/Resources/DynamicWebTWAINMacEdition.pkg
+/Resources/DynamicWebTWAINPlugIn.msi
+/Resources/DynamicWebTWAINx64.cab
+/Resources/dynamsoft.webtwain.initiate.js

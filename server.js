@@ -3,7 +3,6 @@ var util = require('util');
 var express = require('express');
 var fs = require('fs');
 var app = express();
-
 app.use(express.static(__dirname)); 
 app.use(express.static(__dirname + '/Resources')); // load static resources
 app.use(function (req, res, next) {
@@ -13,9 +12,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
     next();
 });  
-// app.get('/', function(req, res) {
-//     res.sendFile(__dirname + '/scan.html');
-// })
+
 app.post('/upload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
@@ -26,7 +23,7 @@ app.post('/upload', function (req, res) {
  
         fs.readFile(files.RemoteFile.path, function (err, data) {
             // save file from temp dir to new dir
-            var newPath = __dirname + "/uploads/" + files.RemoteFile.name;
+            var newPath = __dirname + "/UploadedImages/" + files.RemoteFile.name;
             fs.writeFile(newPath, data, function (err) {
                 if (err) throw err;
                 console.log('file saved');
@@ -36,7 +33,7 @@ app.post('/upload', function (req, res) {
     });
 })
 
-var server = app.listen(2014, function () {
+var server = app.listen(2016, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('listening at http://%s:%s', host, port);
