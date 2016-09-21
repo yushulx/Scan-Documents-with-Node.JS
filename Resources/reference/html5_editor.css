@@ -149,7 +149,7 @@ dialog[open] {
 }
 
 .ds-dwt-viewerToolbar > ul > li {
-	padding: 0;
+	padding: 0 0 0 2px;
 	margin: 0;
 	float: left;
 	z-index: 1;
@@ -363,4 +363,13 @@ dialog[open] {
 	padding: 0 0 0 20px;
 	height: 140px; 
 	width:300px
+}
+
+.ds-dwt-EditorButton-selected
+{
+	border: 1px solid #777;
+	border-right: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	background-color: #BBB;
+	line-height:1px;
 }

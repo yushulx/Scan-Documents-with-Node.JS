@@ -1,30 +1,59 @@
 
 function OnWebTwainNotFoundOnWindowsCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
-	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumWindow, bIE, bSafari, bSSL, strIEVersion);
+	var objUrl={'default':InstallerUrl};
+	
+	_show_install_dialog(ProductName, objUrl, bHTML5, EnumDWT_PlatformType.enumWindow, bIE, bSafari, bSSL, strIEVersion);
 }
 
-function OnWebTwainNotFoundOnLinuxCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
-	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumLinux, bIE, bSafari, bSSL, strIEVersion);
+function OnWebTwainNotFoundOnLinuxCallback(ProductName, strDebUrl, strRpmUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
+	var objUrl={'default':strDebUrl, 'deb':strDebUrl, 'rpm':strRpmUrl};
+	
+	_show_install_dialog(ProductName, objUrl, bHTML5, EnumDWT_PlatformType.enumLinux, bIE, bSafari, bSSL, strIEVersion);
 }
 
 function OnWebTwainNotFoundOnMacCallback(ProductName, InstallerUrl, bHTML5, bIE, bSafari, bSSL, strIEVersion) {
-	_show_install_dialog(ProductName, InstallerUrl, bHTML5, EnumDWT_PlatformType.enumMac, bIE, bSafari, bSSL, strIEVersion);
+
+	var objUrl={'default':InstallerUrl};
+		
+	_show_install_dialog(ProductName, objUrl, bHTML5, EnumDWT_PlatformType.enumMac, bIE, bSafari, bSSL, strIEVersion);
 }
 
-function _show_install_dialog(ProductName, InstallerUrl, bHTML5, iPlatform, bIE, bSafari, bSSL, strIEVersion){
+function dwt_change_install_url(url)
+{
+	var install=document.getElementById('dwt-btn-install');
+	if(install)
+		install.href = url;
+}
+
+function _show_install_dialog(ProductName, objInstallerUrl, bHTML5, iPlatform, bIE, bSafari, bSSL, strIEVersion){
 	
 	var _height = 220, ObjString = [
 			'<div class="dwt-box-title">',
 			ProductName,
-			' is not installed</div>',
-			'<div style="margin:20px;text-align:center"><a id="dwt-btn-install" target="_blank" href="',
-			InstallerUrl,
-			'" onclick="Dynamsoft_OnClickInstallButton()"><div class="dwt-button"></div></a>',
-			'<i>* Please manually install it</i></div>'];
+			' is not installed</div>'];
+	
+	
+	if (bHTML5 && iPlatform == EnumDWT_PlatformType.enumLinux)
+	{
+		ObjString.push('<div style="margin:10px 0 0 5px;"><div id="dwt-install-url-div"><div><input id="dwt-install-url-deb" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['deb'] + '\')" checked="checked" /><label for="dwt-install-url-deb">64 bit .deb (For Debian/Ubuntu)</label></div>');
+		ObjString.push('<div><input id="dwt-install-url-rpm" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['rpm'] + '\')" /><label for="dwt-install-url-rpm">64 bit .rpm (For Fedora/openSUSE)</label></div></div></div>');
+	}
+	else
+	{
+		ObjString.push('<div style="margin-top:20px;"></div>');
+	}
+	
+	ObjString.push('<div style="margin:0 20px 20px 20px;text-align:center">');
+	ObjString.push('<a id="dwt-btn-install" target="_blank" href="');
+	ObjString.push(objInstallerUrl['default']);
+	ObjString.push('" onclick="Dynamsoft_OnClickInstallButton()"><div class="dwt-button"></div></a>');
+	ObjString.push('<i>* Please manually install it</i></div>');
 
 	if(bHTML5){
 
 		if(bIE){
+			_height = 260;
+			
 			ObjString.push('<div>');
 			ObjString.push('If you still see the dialog after installing the scan plugin, please<br />');
 			ObjString.push('1. Add the website to the zone of trusted sites.<br />');
@@ -32,26 +61,27 @@ function _show_install_dialog(ProductName, InstallerUrl, bHTML5, iPlatform, bIE,
 			ObjString.push('2. refresh your browser.');
 			ObjString.push('</div>');
 			
-			_height = 260;
 		} else {
+			_height = 270;
 
-			if(iPlatform == EnumDWT_PlatformType.enumMac && bSafari && bSSL){
-				ObjString.push('<div>');
-				ObjString.push('After the installation, you also need to refer to <br />');
-				ObjString.push('<a href="http://kb.dynamsoft.com/questions/901">this article</a> to enable the scan plugin on the current HTTPS website.');
-				ObjString.push('</div>');
-				_height = 270;
-			}
-			else
-			{		
+			if(iPlatform == EnumDWT_PlatformType.enumMac && bSafari && bSSL) {
+				//
+			} else {
 			    ObjString.push('<div>');
 			    ObjString.push('If you still see the dialog after the installation,<br />');
 			    ObjString.push('please check <a href="http://developer.dynamsoft.com/dwt/why-is-the-browser-prompting-me-to-install-the-scanning-service-repeatedly ">this article</a> for troubleshooting.');
 			    ObjString.push('</div>');
-			    _height = 260;
 			}
 			
-			ObjString.push('<div class="dwt-red" style="padding-top: 10px;">After installation, please REFRESH your browser.</div>');
+			if (iPlatform == EnumDWT_PlatformType.enumLinux 
+				|| navigator.userAgent.toLowerCase().indexOf("firefox") > -1) 
+			{
+			    ObjString.push('<div class="dwt-red" style="padding-top: 10px;">After installation, please RESTART your browser.</div>');
+            } 
+            else
+			{
+				ObjString.push('<div style="padding-top: 10px;">After installation, please REFRESH your browser.</div>');
+			}
 		}
 
 	} else {
@@ -84,16 +114,29 @@ function OnWebTwainOldPluginNotAllowedCallback(ProductName) {
 	Dynamsoft.WebTwainEnv.ShowDialog(392, 227, ObjString.join(''));
 }
 
-function OnWebTwainNeedUpgradeCallback(ProductName, InstallerUrl, bHTML5, bMac, bIE, bSafari, bSSL, strIEVersion){
+function OnWebTwainNeedUpgradeCallback(ProductName, objInstallerUrl, bHTML5, iPlatform, bIE, bSafari, bSSL, strIEVersion){
 	var ObjString = ['<div class="dwt-box-title"></div>',
 		'<div style="font-size: 15px;">',
 		'This page is using a newer version of Dynamic Web TWAIN than your local copy. Please download and upgrade now.',
-		'</div>',
-		'<a id="dwt-btn-install" target="_blank" href="',
-		InstallerUrl,
-		'" onclick="Dynamsoft_OnClickInstallButton()"><div class="dwt-button"></div></a>',
-		'<div style="text-align:center"><i>* Please manually install it</i></div><p></p>'], _height = 220;
+		'</div>'], _height = 220;
 
+	if (bHTML5 && iPlatform == EnumDWT_PlatformType.enumLinux)
+	{
+		ObjString.push('<div style="margin:10px 0 0 5px;"><div id="dwt-install-url-div"><div><input id="dwt-install-url-deb" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['deb'] + '\')" checked="checked" /><label for="dwt-install-url-deb">64 bit .deb (For Debian/Ubuntu)</label></div>');
+		ObjString.push('<div><input id="dwt-install-url-rpm" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['rpm'] + '\')" /><label for="dwt-install-url-rpm">64 bit .rpm (For Fedora/openSUSE)</label></div></div></div>');
+		_height = 260;
+	}
+	else
+	{
+		ObjString.push('<div style="margin-top:20px;"></div>');
+	}	
+		
+	ObjString.push('<a id="dwt-btn-install" target="_blank" href="');
+	ObjString.push(objInstallerUrl['default']);
+	ObjString.push('" onclick="Dynamsoft_OnClickInstallButton()"><div class="dwt-button"></div></a>');
+	ObjString.push('<div style="text-align:center"><i>* Please manually install it</i></div>');
+	ObjString.push('<p></p>');
+	
 	if(bHTML5){
 		ObjString.push('<div class="dwt-red">Please REFRESH your browser after the upgrade.</div>');	
 	} else {

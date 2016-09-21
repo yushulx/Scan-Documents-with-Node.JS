@@ -5,7 +5,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 11.3.2
+* Version: 12.0.0
 */
 
 /**
@@ -657,7 +657,8 @@ var EnumDWT_TIFFCompressionType = {
 var EnumDWT_InterpolationMethod = {
     IM_NEARESTNEIGHBOUR: 1,
     IM_BILINEAR: 2,
-    IM_BICUBIC: 3
+    IM_BICUBIC: 3,
+	IM_BESTQUALITY: 5
 };
 
 /** Image type */
@@ -1215,6 +1216,18 @@ var EnumDWT_FitWindowType = {
     enumFitWindowWidth: 2
 };
 
+var EnumDWT_UploadDataFormat = {
+	Binary: 0,
+	Base64: 1
+};
+
+
+var EnumDWT_MouseShape = {
+	Default: 0,
+	Hand: 1,
+	Crosshair: 2,
+	Zoom: 3
+};
 
 /**
  * @class
@@ -1680,7 +1693,13 @@ WebTwain.prototype = {
      * @type {bool}
      */
     IfUseTwainDSM: false,
-
+	
+    /** 
+     * Specifies whether or not to automatically scroll to the last image or stay on the current image when loading or acquiring images
+     * @type {bool}
+     */
+	IfAutoScroll: false,
+	
     /** 
      * [Deprecated.] The number of bits in each image pixel (or bit depth). This is a runtime, read-only property.
      * @type {short}
@@ -2570,6 +2589,23 @@ WebTwain.prototype.HTTPUploadAllThroughPutAsPDF = function(HTTPServer, RemoteFil
  * @return {bool}
  */
 WebTwain.prototype.HTTPUploadThroughPutAsMultiPagePDF = function(HTTPServer, RemoteFileName, optionalAsyncSuccessFunc, optionalAsyncFailureFunc) {
+};
+
+
+/**
+ * Uploads the images specified by the indices to the HTTP server.
+ * @method WebTwain#HTTPUpload 
+ * @param {string} url the url where the images are sent in a POST request.
+ * @param {Array} indices indices specifies which images are to be uploaded.
+ * @param {EnumDWT_ImageType} enumImageType the image format in which the images are to be uploaded.
+ * @param {EnumDWT_UploadDataFormat} dataFormat whether to upload the images as binary or a base64-based string.
+ * @param {bool} bUploadInSegments set to true to upload in segments; otherwise, false.
+ * @param {function} asyncSuccessFunc the function to call when the upload succeeds. Please refer to the function prototype OnSuccess.
+ * @param {function} asyncFailureFunc the function to call when the upload fails. Please refer to the function prototype OnFailure.
+ * @return {bool}
+ */
+WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, bUploadInSegments, asyncSuccessFunc, asyncFailureFunc){
+
 };
 
 /**
@@ -3515,6 +3551,41 @@ WebTwain.prototype.SetDefaultSource = function(sImageIndex) {
  */
 WebTwain.prototype.SetSelectedImageArea = function(sImageIndex, left, top, right, bottom) {
 };
+
+
+/**
+ * Converts the images specified by the indices to base64.
+ * @method WebTwain#ConvertToBase64 
+ * @param {Array} indices indices specifies which images are to be converted to base64.
+ * @param {EnumDWT_ImageType} enumImageType the image format in which the images are to be converted to base64.
+ * @param {function} asyncSuccessFunc the function to call when the upload succeeds. Please refer to the function prototype OnSuccess.
+ * @param {function} asyncFailureFunc the function to call when the upload fails. Please refer to the function prototype OnFailure.
+ * @return {bool}
+ */
+WebTwain.prototype.ConvertToBase64 = function(indices, enumImageType, asyncSuccessFunc, asyncFailureFunc) {
+};
+
+/**
+ * Returns the direct URL of an image specified by index, if iWidth or iHeight is set to -1, you get the original image, otherwise you get the image with specified iWidth or iHeight while keeping the same aspect ratio.
+ * @method WebTwain#GetImageURL 
+ * @param {short} index the index of the image.
+ * @param {int} iWidth the width of the image.
+ * @param {int} iHeight the height of the image.
+ * @return {string}
+ */
+WebTwain.prototype.GetImageURL = function(index, iWidth, iHeight) {
+};
+
+/**
+ * Sets a header for the current HTTP Post request.
+ * @method WebTwain#SetHTTPHeader 
+ * @param {string} key the key of the header.
+ * @param {string} value the value of the header.
+ * @return {bool}
+ */
+WebTwain.prototype.SetHTTPHeader = function(key, value) {
+};
+
 
 /**
  * @namespace Dynamsoft.WebTwainEnv

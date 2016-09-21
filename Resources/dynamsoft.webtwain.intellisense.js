@@ -5,7 +5,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 11.3.2
+* Version: 12.0.0
 */
 
 /**
@@ -592,7 +592,8 @@ var EnumDWT_TIFFCompressionType = {
 var EnumDWT_InterpolationMethod = {
     IM_NEARESTNEIGHBOUR: 1,
     IM_BILINEAR: 2,
-    IM_BICUBIC: 3
+    IM_BICUBIC: 3,
+	IM_BESTQUALITY: 5
 };
 
 /// Image type
@@ -1147,6 +1148,18 @@ var EnumDWT_FitWindowType = {
 };
 
 
+var EnumDWT_UploadDataFormat = {
+	Binary: 0,
+	Base64: 1
+};
+
+var EnumDWT_MouseShape = {
+	Default: 0,
+	Hand: 1,
+	Crosshair: 2,
+	Zoom: 3
+};
+
 /**
  * @WebTWAIN class
  */
@@ -1388,6 +1401,9 @@ Dynamsoft.WebTwain.prototype = {
 
     /// <field name='IfUseTwainDSM' type='bool'>Sets or returns whether Dynamic Web TWAIN uses the new TWAIN Data Source Manager (TWAINDSM.dll) when acquiring images from TWAIN devices.</field>
     IfUseTwainDSM: false,
+	
+    /// <field name='IfAutoScroll' type='bool'>Specifies whether or not to automatically scroll to the last image or stay on the current image when loading or acquiring images</field>
+	IfAutoScroll: false,
 
     /// <field name='ImageBitsPerPixel' type='short'>[Deprecated.] The number of bits in each image pixel (or bit depth). This is a runtime, read-only property.</field>
     ImageBitsPerPixel: 0,
@@ -1983,6 +1999,20 @@ Dynamsoft.WebTwain.prototype.HTTPUploadThroughPutAsMultiPagePDF = function(HTTPS
     /// <returns type="bool"/>
 };
 
+
+Dynamsoft.WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, bUploadInSegments, asyncSuccessFunc, asyncFailureFunc){
+	/// <summary>Uploads the images specified by the indices to the HTTP server.</summary>
+    /// <param name="url" type="string">The url where the images are sent in a POST request.</param>
+	/// <param name="indices" type="Array">Indices specifies which images are to be uploaded.</param>
+	/// <param name="enumImageType" type="EnumDWT_ImageType">The image format in which the images are to be uploaded.</param>
+	/// <param name="dataFormat" type="EnumDWT_UploadDataFormat">Whether to upload the images as binary or a base64-based string.</param>
+	/// <param name="bUploadInSegments" type="bool">Set to true to upload in segments; otherwise, false.</param>
+    /// <param name="asyncSuccessFunc" type="function">The function to call when the upload succeeds. Please refer to the function prototype OnSuccess.</param>
+    /// <param name="asyncFailureFunc" type="function">The function to call when the upload fails. Please refer to the function prototype OnFailure.</param>
+    /// <returns type="bool"/>
+	
+};
+	
 Dynamsoft.WebTwain.prototype.LoadDibFromClipboard = function(optionalAsyncSuccessFunc, optionalAsyncFailureFunc) {
     /// <summary>Loads a DIB format image from Clipboard into the Dynamic Web TWAIN.</summary>
     /// <param name="optionalAsyncSuccessFunc" type="function" optional ="true">optional. The function to call when the loading succeeds. Please refer to the function prototype OnSuccess.</param>
@@ -2824,6 +2854,32 @@ Dynamsoft.WebTwain.prototype.SetSelectedImageArea = function(sImageIndex, left, 
     /// <param name="bottom" type="int">The Y axis of the bottom border.</param>
     /// <returns type="bool"></returns>
 };
+
+Dynamsoft.WebTwain.prototype.ConvertToBase64 = function (indices, enumImageType, asyncSuccessFunc, asyncFailureFunc){
+	/// <summary>Converts the images specified by the indices to base64.</summary>
+    /// <param name="indices" type="Array">Indices specifies which images are to be converted to base64.</param>
+	/// <param name="enumImageType" type="EnumDWT_ImageType">The image format in which the images are to be converted to base64.</param>
+	/// <param name="asyncSuccessFunc" type="function">The function to call when the upload succeeds. Please refer to the function prototype OnSuccess.</param>
+    /// <param name="asyncFailureFunc" type="function">The function to call when the upload fails. Please refer to the function prototype OnFailure.</param>
+    /// <returns type="bool"/>
+};
+
+
+Dynamsoft.WebTwain.prototype.GetImageURL = function (index, iWidth, iHeight){
+	/// <summary>Returns the direct URL of an image specified by index, if iWidth or iHeight is set to -1, you get the original image, otherwise you get the image with specified iWidth or iHeight while keeping the same aspect ratio.</summary>
+	/// <param name="index" type="short">The index of the image.</param>
+	/// <param name="iWidth" type="int">The width of the image.</param>
+	/// <param name="iHeight" type="int">The height of the image.</param>
+	/// <returns type="string"/>
+};
+
+Dynamsoft.WebTwain.prototype.SetHTTPHeader = function (key, value){
+	/// <summary>Sets a header for the current HTTP Post request.</summary>
+	/// <param name="key" type="string">The key of the header.</param>
+	/// <param name="value" type="string">The value of the header.</param>
+	/// <returns type="bool"/>
+};
+
 
 /**
  * @namespace WebTwainEnv
