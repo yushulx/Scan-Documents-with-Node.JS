@@ -7,7 +7,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 12.0
+* Version: 12.1
 */
 
 var EnumDWT_ConverMode = {

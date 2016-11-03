@@ -5,7 +5,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 12.0.0
+* Version: 12.1
 */
 
 /**
@@ -2591,6 +2591,16 @@ WebTwain.prototype.HTTPUploadAllThroughPutAsPDF = function(HTTPServer, RemoteFil
 WebTwain.prototype.HTTPUploadThroughPutAsMultiPagePDF = function(HTTPServer, RemoteFileName, optionalAsyncSuccessFunc, optionalAsyncFailureFunc) {
 };
 
+/**
+ * Configures how segmented upload is done.
+ * @method WebTwain#SetUploadSegment 
+ * @param {int} segmentUploadThreshold specifies the threshold (in MB) over which segmented upload will be invoked.
+ * @param {int} moduleSize specifies the size of each segment (in KB).
+ * @return {bool}
+ */
+WebTwain.prototype.SetUploadSegment = function (segmentUploadThreshold, moduleSize){
+
+};
 
 /**
  * Uploads the images specified by the indices to the HTTP server.
@@ -2599,12 +2609,11 @@ WebTwain.prototype.HTTPUploadThroughPutAsMultiPagePDF = function(HTTPServer, Rem
  * @param {Array} indices indices specifies which images are to be uploaded.
  * @param {EnumDWT_ImageType} enumImageType the image format in which the images are to be uploaded.
  * @param {EnumDWT_UploadDataFormat} dataFormat whether to upload the images as binary or a base64-based string.
- * @param {bool} bUploadInSegments set to true to upload in segments; otherwise, false.
  * @param {function} asyncSuccessFunc the function to call when the upload succeeds. Please refer to the function prototype OnSuccess.
  * @param {function} asyncFailureFunc the function to call when the upload fails. Please refer to the function prototype OnFailure.
  * @return {bool}
  */
-WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, bUploadInSegments, asyncSuccessFunc, asyncFailureFunc){
+WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, asyncSuccessFunc, asyncFailureFunc){
 
 };
 

@@ -122,8 +122,8 @@ function OnWebTwainNeedUpgradeCallback(ProductName, objInstallerUrl, bHTML5, iPl
 
 	if (bHTML5 && iPlatform == EnumDWT_PlatformType.enumLinux)
 	{
-		ObjString.push('<div style="margin:10px 0 0 5px;"><div id="dwt-install-url-div"><div><input id="dwt-install-url-deb" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['deb'] + '\')" checked="checked" /><label for="dwt-install-url-deb">64 bit .deb (For Debian/Ubuntu)</label></div>');
-		ObjString.push('<div><input id="dwt-install-url-rpm" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['rpm'] + '\')" /><label for="dwt-install-url-rpm">64 bit .rpm (For Fedora/openSUSE)</label></div></div></div>');
+		ObjString.push('<div style="margin:10px 0 0 5px;"><div id="dwt-install-url-div"><div><input id="dwt-install-url-deb" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['deb'] + '\')" checked="checked" /><label for="dwt-install-url-deb">64 bit .deb (For Ubuntu/Debian)</label></div>');
+		ObjString.push('<div><input id="dwt-install-url-rpm" name="dwt-install-url" type="radio" onclick="dwt_change_install_url(\'' + objInstallerUrl['rpm'] + '\')" /><label for="dwt-install-url-rpm">64 bit .rpm (For Fedora/CentOS)</label></div></div></div>');
 		_height = 260;
 	}
 	else
@@ -164,3 +164,30 @@ function OnWebTwainPostExecuteCallback(){
 	Dynamsoft.WebTwainEnv.OnWebTwainPostExecute();
 }
 
+function OnRemoteWebTwainNotFoundCallback(ProductName, ip, port, bSSL)
+{
+	var ObjString = [
+		'<div class="dwt-box-title">',
+		ProductName,
+		'</div>',
+		'<div style="margin-top:10px">',
+		'Dynamic Web TWAIN is not installed on the PC with IP/domain ',
+		ip, ', please open the page on that PC to download and install it.',
+		'</div>'];
+
+	Dynamsoft.WebTwainEnv.ShowDialog(392, 227, ObjString.join(''));
+}
+
+function OnRemoteWebTwainNeedUpgradeCallback(ProductName, ip, port, bSSL)
+{
+	var ObjString = [
+		'<div class="dwt-box-title">',
+		ProductName,
+		'</div>',
+		'<div style="margin-top:10px">',
+		'Dynamic Web TWAIN is outdated on the PC with IP/domain ',
+		ip, ', please open the page on that PC to download and install it.',
+		'</div>'];
+
+	Dynamsoft.WebTwainEnv.ShowDialog(392, 227, ObjString.join(''));
+}

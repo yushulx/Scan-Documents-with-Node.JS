@@ -5,4 +5,7 @@
 /Resources/*.exe
 /Resources/*.pkg
 /Resources/*.msi
+/Resources/*.deb
+/Resources/*.rpm
 /Resources/dynamsoft.webtwain.initiate.js
+

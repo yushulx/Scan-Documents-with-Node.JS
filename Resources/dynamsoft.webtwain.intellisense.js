@@ -5,7 +5,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 12.0.0
+* Version: 12.1
 */
 
 /**
@@ -1999,14 +1999,20 @@ Dynamsoft.WebTwain.prototype.HTTPUploadThroughPutAsMultiPagePDF = function(HTTPS
     /// <returns type="bool"/>
 };
 
+Dynamsoft.WebTwain.prototype.SetUploadSegment = function (segmentUploadThreshold, moduleSize){
+	/// <summary>Configures how segmented upload is done.</summary>
+    /// <param name="segmentUploadThreshold" type="int">specifies the threshold (in MB) over which segmented upload will be invoked.</param>
+	/// <param name="moduleSize" type="int">specifies the size of each segment (in KB).</param>
+    /// <returns type="bool"/>
+	
+};
 
-Dynamsoft.WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, bUploadInSegments, asyncSuccessFunc, asyncFailureFunc){
+Dynamsoft.WebTwain.prototype.HTTPUpload = function (url, indices, enumImageType, dataFormat, asyncSuccessFunc, asyncFailureFunc){
 	/// <summary>Uploads the images specified by the indices to the HTTP server.</summary>
     /// <param name="url" type="string">The url where the images are sent in a POST request.</param>
 	/// <param name="indices" type="Array">Indices specifies which images are to be uploaded.</param>
 	/// <param name="enumImageType" type="EnumDWT_ImageType">The image format in which the images are to be uploaded.</param>
 	/// <param name="dataFormat" type="EnumDWT_UploadDataFormat">Whether to upload the images as binary or a base64-based string.</param>
-	/// <param name="bUploadInSegments" type="bool">Set to true to upload in segments; otherwise, false.</param>
     /// <param name="asyncSuccessFunc" type="function">The function to call when the upload succeeds. Please refer to the function prototype OnSuccess.</param>
     /// <param name="asyncFailureFunc" type="function">The function to call when the upload fails. Please refer to the function prototype OnFailure.</param>
     /// <returns type="bool"/>

@@ -7,7 +7,7 @@
 *
 * Copyright 2016, Dynamsoft Corporation 
 * Author: Dynamsoft Support Team
-* Version: 12.0
+* Version: 12.1
 */
 
 /** -2400 to -2499 is webcam error code */
