@@ -1,69 +1,95 @@
-<html>    
+<html>
+
 <head>
 	<title>Scan Documents with Node JS</title>
-	<script src="/dynamsoft.webtwain.initiate.js"></script>
-	<script src="/dynamsoft.webtwain.config.js"></script>
+	<script src="https://unpkg.com/dwt/dist/dynamsoft.webtwain.min.js"> </script>
 	<style>
 		h1 {
 			font-size: 2em;
 			font-weight: bold;
 			color: #777777;
 			text-align: center
-		}            
+		}
+
 		table {
 			margin: auto;
 		}
 	</style>
-</head>    
+</head>
+
 <body>
 	<h1>
 		Scan Documents with Node JS
 	</h1>
 	<table>
 		<tr>
-		<td><div id="dwtcontrolContainer"></div>
-		</td>
+			<td>
+				<div id="dwtcontrolContainer"></div>
+			</td>
 		</tr>
 		<tr>
-		<td>
-			<input type="button" value="Load Image" onclick="btnLoad_onclick();" />
-			<input type="button" value="Scan Image" onclick="AcquireImage();" />
-			<input id="btnUpload" type="button" value="Upload Image" onclick="btnUpload_onclick()">
-		</td>
+			<td>
+				<input type="button" value="Load Image" onclick="LoadImages();" />
+				<input type="button" value="Scan Image" onclick="AcquireImage();" />
+				<input id="btnUpload" type="button" value="Upload Image" onclick="btnUpload_onclick()">
+			</td>
 		</tr>
 	</table>
 
 	<!--Custom script goes here-->
 	<script type="text/javascript">
-		Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
 		var DWObject;
+
+		window.onload = function () {
+			Dynamsoft.WebTwainEnv.AutoLoad = false;
+			Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '100%', Height: '500px' }];
+			Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
+			/**
+			 * In order to use the full version, do the following
+			 * 1. Change Dynamsoft.WebTwainEnv.Trial to false
+			 * 2. Replace A-Valid-Product-Key with a full version key
+			 * 3. Change Dynamsoft.WebTwainEnv.ResourcesPath to point to the full version 
+			 *    resource files that you obtain after purchasing a key
+			 */
+			Dynamsoft.WebTwainEnv.Trial = true;
+			//Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
+			//Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
+
+			Dynamsoft.WebTwainEnv.Load();
+		};
+
 		function Dynamsoft_OnReady() {
 			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
-		}
-		
-		function btnLoad_onclick() {
-			var OnSuccess = function() {};
-			var OnFailure = function(errorCode, errorString) {};
-			DWObject.IfShowFileDialog = true;
-			DWObject.LoadImageEx("", EnumDWT_ImageType.IT_ALL, OnSuccess, OnFailure);
 		}
 
 		function AcquireImage() {
 			if (DWObject) {
-				var bSelected = DWObject.SelectSource();
-				if (bSelected) {
+				DWObject.SelectSource(function () {
 					var OnAcquireImageSuccess, OnAcquireImageFailure;
 					OnAcquireImageSuccess = OnAcquireImageFailure = function () {
 						DWObject.CloseSource();
 					};
-
 					DWObject.OpenSource();
-					DWObject.IfDisableSourceAfterAcquire = true;  //Scanner source will be disabled/closed automatically after the scan.
+					DWObject.IfDisableSourceAfterAcquire = true;
 					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-				}
+				}, function () {
+					console.log('SelectSource failed!');
+				});
 			}
 		}
-	
+
+		function LoadImages() {
+			if (DWObject) {
+				DWObject.LoadImageEx('', 5,
+					function () {
+					},
+					function (errorCode, errorString) {
+						alert('Load Image:' + errorString);
+					}
+				);
+			}
+		}
+
 		function btnUpload_onclick() {
 			var strHTTPServer = location.hostname;
 			DWObject.IfSSL = Dynamsoft.Lib.detect.ssl;
@@ -74,9 +100,9 @@
 			var CurrentPathName = unescape(location.pathname); // get current PathName in plain ASCII
 			var CurrentPath = CurrentPathName.substring(0, CurrentPathName.lastIndexOf("/") + 1);
 			var strActionPage = CurrentPath + "upload";
-			var sFun = function(){
-				alert('successfully uploaded a file');
-			}, fFun = function(){
+			var sFun = function () {
+				console.log('successfully uploaded a file');
+			}, fFun = function () {
 				alert('failed to upload!');
 			};
 			var Digital = new Date();

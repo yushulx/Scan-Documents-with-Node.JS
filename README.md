@@ -9,26 +9,22 @@ Screenshots
 
 Blog
 -----------------------
-[Document Imaging and Uploading With Dynamic Web TWAIN and Node.js][5]
+[Document Imaging and Uploading With Dynamic Web TWAIN and Node.js][4]
 
 Download & Installation
 -----------------------
-* [Dynamic Web TWAIN 11.2][1]
-* [Node.js][2]
+* [Node.js][1]
 
 How to Run
 -----------
-1. download and instal Dynamic Web TWAIN
-2. copy the Resource folder from the installation directory (like C:\Program Files (x86)\Dynamsoft\Dynamic Web TWAIN SDK {version number} Trial)
-3. Install two Node.js modules by CMD
+1. Install two Node.js modules by CMD
 	`npm install formidable@latest`
 	`npm install express`
-4. Run the server in CMD
+2. Run the server in CMD
 	`node server.js`
-5. visit `localhost:2016`
+3. visit `localhost:2016`
 
-[1]:http://www.dynamsoft.com/Downloads/WebTWAIN_Download.aspx
-[2]:http://nodejs.org/download/
-[3]:http://expressjs.com/
-[4]:https://github.com/felixge/node-formidable
-[5]:http://www.codepool.biz/twain/document-imaging-and-uploading-with-dynamic-web-twain-and-node-js.html
+[1]:http://nodejs.org/download/
+[2]:http://expressjs.com/
+[3]:https://github.com/felixge/node-formidable
+[4]:http://www.codepool.biz/twain/document-imaging-and-uploading-with-dynamic-web-twain-and-node-js.html
