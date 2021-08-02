@@ -20,16 +20,27 @@ app.post('/upload', function (req, res) {
         //     fields: fields,
         //     files: files
         // }));
+		
+		fs.readdir(__dirname + "/UploadedImages/", function(err, readfiles) {
+			console.log(err);
+			if (err) {				
+				fs.mkdir(__dirname + "/UploadedImages/", function(err) {
+					console.log('make dir success.');
+				});
+			}
+			
+			fs.readFile(files.RemoteFile.path, function (err, data) {
+				// save file from temp dir to new dir
+				var newPath = __dirname + "/UploadedImages/" + files.RemoteFile.name;
+				fs.writeFile(newPath, data, function (err) {
+					if (err) throw err;
+					console.log('file saved');
+					res.end();
+				});
+			});
+		});
  
-        fs.readFile(files.RemoteFile.path, function (err, data) {
-            // save file from temp dir to new dir
-            var newPath = __dirname + "/UploadedImages/" + files.RemoteFile.name;
-            fs.writeFile(newPath, data, function (err) {
-                if (err) throw err;
-                console.log('file saved');
-                res.end();
-            });
-        });
+        
     });
 })
 
