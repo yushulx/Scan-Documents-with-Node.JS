@@ -41,25 +41,27 @@
 		var DWObject;
 
 		window.onload = function () {
-			Dynamsoft.WebTwainEnv.AutoLoad = false;
-			Dynamsoft.WebTwainEnv.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '100%', Height: '500px' }];
-			Dynamsoft.WebTwainEnv.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
+			Dynamsoft.DWT.AutoLoad = false;
+			Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '400px', Height: '500px' }];
+			Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
 			/**
 			 * In order to use the full version, do the following
-			 * 1. Change Dynamsoft.WebTwainEnv.Trial to false
+			 * 1. Change Dynamsoft.DWT.Trial to false
 			 * 2. Replace A-Valid-Product-Key with a full version key
-			 * 3. Change Dynamsoft.WebTwainEnv.ResourcesPath to point to the full version 
+			 * 3. Change Dynamsoft.DWT.ResourcesPath to point to the full version 
 			 *    resource files that you obtain after purchasing a key
 			 */
-			Dynamsoft.WebTwainEnv.Trial = true;
-			//Dynamsoft.WebTwainEnv.ProductKey = "A-Valid-Product-Key";
-			//Dynamsoft.WebTwainEnv.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
+			Dynamsoft.DWT.Trial = true;
+			//Dynamsoft.DWT.ProductKey = "A-Valid-Product-Key";
+			//Dynamsoft.DWT.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/15.0";
+			Dynamsoft.DWT.ProductKey = 't00901wAAAJLih35A7b5lyElTG8GzK8GLIahKwWbbGvzolCwd96cIZUujAlD5fr0gA0qYMAjEvvEN8XpZ9iXWhJfh5ehezsf521Aw3y0gOvAJMg0gYm5qojdpmiuj';
+			Dynamsoft.DWT.ResourcesPath = 'https://unpkg.com/dwt/dist/';
 
-			Dynamsoft.WebTwainEnv.Load();
+			Dynamsoft.DWT.Load();
 		};
 
 		function Dynamsoft_OnReady() {
-			DWObject = Dynamsoft.WebTwainEnv.GetWebTwain('dwtcontrolContainer');
+			DWObject = Dynamsoft.DWT.GetWebTwain('dwtcontrolContainer');
 		}
 
 		function AcquireImage() {
