@@ -43,17 +43,11 @@
 
 		window.onload = function () {
 			Dynamsoft.DWT.AutoLoad = false;
-			Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '400px', Height: '500px' }];
+			Dynamsoft.DWT.UseLocalService = true;
+			Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: '640px', Height: '640px' }];
 			Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', Dynamsoft_OnReady);
-			/**
-			 * In order to use the full version, do the following
-			 * 1. Replace A-Valid-Product-Key with a full version key
-			 * 2. Change Dynamsoft.DWT.ResourcesPath to point to the full version 
-			 *    resource files that you obtain after purchasing a key
-			 */
-			//Dynamsoft.DWT.ProductKey = "A-Valid-Product-Key";
-			//Dynamsoft.DWT.ResourcesPath = "https://tst.dynamsoft.com/libs/dwt/17.0";
-			Dynamsoft.DWT.ProductKey = 't00901wAAAFGokK55GCTHFf8RWZ8bKjNRD1O+Gf0xA6MUdkmYI6zSueLnBjy55bNxl/YW1HkZykS/h0xYHBuFFwIDbexR567425Cx3hnuwAewN5DyXtRd/ATLnyy+';
+			// https://www.dynamsoft.com/customer/license/trialLicense?product=dwt
+			Dynamsoft.DWT.ProductKey = 'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ==';
 			Dynamsoft.DWT.ResourcesPath = 'https://unpkg.com/dwt/dist/';
 
 			Dynamsoft.DWT.Load();
@@ -65,16 +59,12 @@
 
 		function AcquireImage() {
 			if (DWObject) {
-				DWObject.SelectSource(function () {
-					var OnAcquireImageSuccess, OnAcquireImageFailure;
-					OnAcquireImageSuccess = OnAcquireImageFailure = function () {
-						DWObject.CloseSource();
-					};
-					DWObject.OpenSource();
-					DWObject.IfDisableSourceAfterAcquire = true;
-					DWObject.AcquireImage(OnAcquireImageSuccess, OnAcquireImageFailure);
-				}, function () {
-					console.log('SelectSource failed!');
+				DWObject.SelectSourceAsync().then(function () {
+					return DWObject.AcquireImageAsync({
+						IfCloseSourceAfterAcquire: true
+					});
+				}).catch(function (exp) {
+					alert(exp.message);
 				});
 			}
 		}
@@ -98,13 +88,13 @@
 			if (Dynamsoft.Lib.detect.ssl == true)
 				_strPort = location.port == "" ? 443 : location.port;
 			DWObject.HTTPPort = _strPort;
-			var CurrentPathName = unescape(location.pathname); // get current PathName in plain ASCII
+			var CurrentPathName = unescape(location.pathname);
 			var CurrentPath = CurrentPathName.substring(0, CurrentPathName.lastIndexOf("/") + 1);
 			var strActionPage = CurrentPath + "upload";
 			var sFun = function () {
-				console.log('successfully uploaded a file');
+				alert('success to upload!');
 			}, fFun = function () {
-				alert('failed to upload!');
+				alert('fail to upload!');
 			};
 			var Digital = new Date();
 			var uploadfilename = Digital.getMilliseconds();
